@@ -95,7 +95,7 @@ const sampleData = {
       category: "Nappa Bag",
       description:
         "Inspired by the iconic style of 2009, the Aventure bag reflects a sleek, casual charm. This version with larger proportions features refined touches like the snap-hook closure and the distinctive trick. ",
-      images: ["/sample-products/11.avif"],
+      images: ["/sample-products/11.webp"],
       price: 1399.99,
       brand: "Miu Miu",
       rating: 4.6,

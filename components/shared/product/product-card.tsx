@@ -7,8 +7,9 @@ import {
 import Image from "next/image";
 import ProductPrice from "./product-price";
 import Link from "next/link";
+import { Product } from "@/types";
 
-function ProductCard({ product }: { product: any }) {
+function ProductCard({ product }: { product: Product }) {
   return (
     <Card className="pt-0 group w-full overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition-all duration-300 ">
       <CardHeader className="p-0 relative overflow-hidden bg-gray-50">
