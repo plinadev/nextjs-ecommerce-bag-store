@@ -1,22 +1,24 @@
+import { hashSync } from "bcrypt-ts-edge";
+
 const sampleData = {
   users: [
     {
       name: "John",
       email: "admin@example.com",
-      password: "123456",
+      password: hashSync("123456", 10),
       role: "admin",
     },
     {
       name: "Jane",
       email: "user@example.com",
-      password: "123456",
+      password: hashSync("123456", 10),
       role: "user",
     },
   ],
   products: [
     {
       name: "Wander matelassé nappa leather hobo bag",
-      slug: "wander-matelassé-nappa-leather-hobo-bag",
+      slug: "wander-matelasse-nappa-leather-hobo-bag",
       category: "Hobo Bags",
       description:
         "The Wander bag is reinterpreted season after season, becoming an iconic accessory of Miu Miu collections.",
@@ -36,7 +38,7 @@ const sampleData = {
       description:
         "The soft touch of suede gives depth to the colors and enriches the IVY bag with timeless style. The tonal leather lettering logo completes the design with an iconic note.",
       images: ["/sample-products/5.avif", "/sample-products/6.avif"],
-      price: 85.9,
+      price: 2285.9,
       brand: "Miu Miu",
       rating: 4.2,
       numReviews: 8,
@@ -46,7 +48,7 @@ const sampleData = {
     },
     {
       name: "Arcadie Matelassé velvet bag",
-      slug: "arcadie-matelassé-velvet-bag",
+      slug: "arcadie-matelasse-velvet-bag",
       category: "Small Bags",
       description:
         "Precious matelassé workmanship enhances the classic lines of this velvet  Arcadie matelassé bag thanks to a three-dimensional, textured, and extremely sophisticated effect.",
