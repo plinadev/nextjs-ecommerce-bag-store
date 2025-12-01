@@ -1,4 +1,8 @@
-import { insertProductsSchema } from "@/lib/validators";
+import {
+  cartItemSchema,
+  insertCartSchema,
+  insertProductsSchema,
+} from "@/lib/validators";
 import z from "zod";
 
 export type Product = z.infer<typeof insertProductsSchema> & {
@@ -7,3 +11,7 @@ export type Product = z.infer<typeof insertProductsSchema> & {
   numReviews: number;
   createdAt: Date;
 };
+
+export type Cart = z.infer<typeof insertCartSchema>;
+
+export type CartItem = z.infer<typeof cartItemSchema>;
