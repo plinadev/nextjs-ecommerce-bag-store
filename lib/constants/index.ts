@@ -17,3 +17,9 @@ export const signUpDefaultValues = {
   password: "",
   confirmPassword: "",
 };
+
+export const PAYMENT_MENTHODS = process.env.PAYMENT_METHODS
+  ? process.env.PAYMENT_METHODS.split(", ")
+  : ["PayPal", "Stripe", "CashOnDelivery"];
+
+export const DEFAULT_PAYMENT = process.env.DEFAULT_PAYMENT || "PayPal";
