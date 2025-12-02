@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { ZodError } from "zod";
+import { number, ZodError } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -46,5 +46,22 @@ export function round2(value: number | string) {
     return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
   } else {
     throw new Error("Value is not a number nor string");
+  }
+}
+
+const CURRENCY_FORMATTER = new Intl.NumberFormat("en-US", {
+  currency: "USD",
+  style: "currency",
+  maximumFractionDigits: 2,
+});
+
+//format currency
+export function formatCurrency(amount: number | string | null) {
+  if (typeof amount === "number") {
+    return CURRENCY_FORMATTER.format(amount);
+  } else if (typeof amount === "string") {
+    return CURRENCY_FORMATTER.format(Number(amount));
+  } else {
+    return "NaN";
   }
 }
