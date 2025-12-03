@@ -22,7 +22,7 @@ export function formatNumberWithDecimal(num: number): string {
 //format errors
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function formatError(error: any) {
+export function formatError(error: any) {
   if (error instanceof ZodError) {
     return error.issues.map((i) => i.message).join("\n");
   } else if (
@@ -65,6 +65,13 @@ export function formatCurrency(amount: number | string | null) {
   } else {
     return "NaN";
   }
+}
+
+//format number
+const NUMBER_FORMATTER = new Intl.NumberFormat("en-US");
+
+export function formatNumber(number: number) {
+  return NUMBER_FORMATTER.format(number);
 }
 
 //shorten UUID

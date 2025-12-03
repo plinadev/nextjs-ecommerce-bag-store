@@ -21,15 +21,21 @@ import {
 import {
   approvePayPalOrder,
   createPayPalOrder,
+  updateOrderToDelivered,
+  updateOrderToPaidCOD,
 } from "@/lib/actions/order.actions";
 import { toast } from "sonner";
+import { useTransition } from "react";
+import { Button } from "@/components/ui/button";
 
 function OrderDetailsTable({
   order,
   paypalClientId,
+  isAdmin = false,
 }: {
   order: Order;
   paypalClientId: string;
+  isAdmin: boolean;
 }) {
   const {
     shippingAddress,
@@ -73,6 +79,56 @@ function OrderDetailsTable({
     const res = await approvePayPalOrder(order.id, data);
     if (res.success) toast.success(res.message);
     else toast.error(res.message);
+  };
+
+  //button to mark order as paid
+  const MarkAsPaidButton = () => {
+    const [isPending, startTransition] = useTransition();
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        className="w-full"
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToPaidCOD(id);
+
+            if (!res.success) {
+              toast.error(res.message);
+              return;
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "Processing..." : "Mark as Paid"}
+      </Button>
+    );
+  };
+
+  //button to mark order as delivered
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        className="w-full"
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToDelivered(id);
+
+            if (!res.success) {
+              toast.error(res.message);
+              return;
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "Processing..." : "Mark as Delivered"}
+      </Button>
+    );
   };
   return (
     <>
@@ -170,7 +226,7 @@ function OrderDetailsTable({
               <div className="font-semibold">Total</div>
               <div>{formatCurrency(totalPrice)}</div>
             </div>
-
+            {/* PayPal */}
             {!isPaid && paymentMethod === "PayPal" && (
               <div>
                 <PayPalScriptProvider options={{ clientId: paypalClientId }}>
@@ -183,6 +239,12 @@ function OrderDetailsTable({
                 </PayPalScriptProvider>
               </div>
             )}
+
+            {/* Cash On Delivery */}
+            {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
+              <MarkAsPaidButton />
+            )}
+            {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}
           </CardContent>
         </Card>
       </div>

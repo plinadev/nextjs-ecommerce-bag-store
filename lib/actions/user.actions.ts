@@ -32,9 +32,9 @@ export async function signInWithCredentials(
       message: "Signed in successfully",
     };
   } catch (error) {
-    if (isRedirectError(error)) {
-      throw error;
-    }
+    // if (isRedirectError(error)) {
+    //   throw error;
+    // }
     return {
       success: false,
       message: "Invalid email or password",
