@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import ShippingAddressForm from "./shipping-address-form";
 import { ShippingAddress } from "@/types";
-import CheckoutSteps from "@/components/shared/product/checkout-steps";
+import CheckoutSteps from "@/components/shared/checkout-steps";
 
 export const metadata: Metadata = {
   title: "Shipping Address",

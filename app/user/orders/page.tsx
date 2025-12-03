@@ -1,0 +1,93 @@
+import Pagination from "@/components/shared/pagination";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { getMyOrders } from "@/lib/actions/order.actions";
+import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
+import { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "My Orders",
+};
+
+type SearchParamsPromise = Promise<{ page?: string }>;
+
+async function OrdersPage({
+  searchParams,
+}: {
+  searchParams: SearchParamsPromise;
+}) {
+  const sp = await searchParams;
+  const page = Number(sp.page) || 1;
+
+  const orders = await getMyOrders({ page });
+  return (
+    <div className="space-y-2">
+      <h2 className="h2-bold">Orders </h2>
+      <div className="oberflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Id</TableHead>
+              <TableHead>Date </TableHead>
+              <TableHead>Total</TableHead>
+              <TableHead>Paid</TableHead>
+              <TableHead>Delivered</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {orders.data.map((order) => (
+              <TableRow key={order.id}>
+                <TableCell>{formatId(order.id)}</TableCell>
+                <TableCell>
+                  {formatDateTime(order.createdAt).dateTime}
+                </TableCell>
+                <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
+                <TableCell>
+                  {order.isPaid ? (
+                    <Badge variant="secondary">
+                      Paid at {formatDateTime(order.paidAt!).dateTime}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline">Awaiting payment</Badge>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {order.isDelivered ? (
+                    <Badge variant="secondary">
+                      Delivered at {formatDateTime(order.deliveredAt!).dateTime}
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline">Awaiting delivery</Badge>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <Link href={`/order/${order.id}`}>
+                    <Button size="sm" variant="secondary">
+                      Details
+                    </Button>
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        {orders.totalPages > 1 && (
+          <Pagination page={Number(page) || 1} totalPages={orders.totalPages} />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default OrdersPage;
