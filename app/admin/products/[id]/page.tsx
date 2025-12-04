@@ -1,5 +1,6 @@
 import ProductForm from "@/components/admin/product-form";
 import { getProductById } from "@/lib/actions/product.actions";
+import { requireAdmin } from "@/lib/auth-guard";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -11,6 +12,7 @@ async function AdminProductUpdatePage(props: {
     id: string;
   }>;
 }) {
+  await requireAdmin();
   const { id } = await props.params;
 
   const product = await getProductById(id);

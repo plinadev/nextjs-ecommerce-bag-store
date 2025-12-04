@@ -4,6 +4,7 @@ import Menu from "@/components/shared/header/menu";
 import Link from "next/link";
 import MainNav from "./main-nav";
 import { Input } from "@/components/ui/input";
+import AdminSearch from "@/components/admin/admin-search";
 
 export default function AdminLayout({
   children,
@@ -30,11 +31,7 @@ export default function AdminLayout({
             <MainNav className="mx-6" />
           </div>
           <div className="flex">
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="md:w-60 lg:w-100"
-            />
+            <AdminSearch />
             <Menu />
           </div>
         </div>

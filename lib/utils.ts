@@ -30,7 +30,15 @@ export function formatError(error: any) {
     error.code === "P2002"
   ) {
     //handle prisma error
-    return "User with such name or email already exists";
+    console.log("ERROR: ", error.meta.target);
+    const fields = error.meta?.target;
+
+    if (Array.isArray(fields) && fields.length > 0) {
+      const fieldList = fields.join(", ");
+      return `Same ${fieldList} already exists. Try a different one`;
+    }
+
+    return "A record with these details already exists.";
   } else {
     //handle other errors
     return typeof error.message === "string"
