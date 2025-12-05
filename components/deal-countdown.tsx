@@ -92,7 +92,7 @@ const DealCountdown = () => {
     time.minutes === 0 &&
     time.seconds === 0;
 
-  if (!isEnded) {
+  if (isEnded) {
     return (
       <section className="max-w-7xl mx-auto px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -125,45 +125,45 @@ const DealCountdown = () => {
   }
 
   // ---------- Active Countdown ----------
-  //   return (
-  //     <section className="max-w-7xl mx-auto px-8 py-20 border-y border-gray-200 my-20">
-  //       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-  //         <div className="flex flex-col gap-8">
-  //           <div className="space-y-4">
-  //             <h3 className="text-4xl font-light text-gray-900 tracking-tight leading-tight">
-  //               Deal Of The Month
-  //             </h3>
-  //             <p className="text-sm text-gray-600 leading-relaxed">
-  //               Get ready for a shopping experience like never before with our
-  //               Deals of the Month. Enjoy exclusive perks and offers!
-  //             </p>
-  //           </div>
+  return (
+    <section className="max-w-7xl mx-auto px-8 py-20 border-y border-gray-200 my-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="flex flex-col gap-8">
+          <div className="space-y-4">
+            <h3 className="text-4xl font-light text-gray-900 tracking-tight leading-tight">
+              Deal Of The Month
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Get ready for a shopping experience like never before with our
+              Deals of the Month. Enjoy exclusive perks and offers!
+            </p>
+          </div>
 
-  //           <div className="grid grid-cols-4 gap-6 py-8 border-y border-gray-200">
-  //             <StatBox label="Days" value={time.days} />
-  //             <StatBox label="Hours" value={time.hours} />
-  //             <StatBox label="Minutes" value={time.minutes} />
-  //             <StatBox label="Seconds" value={time.seconds} />
-  //           </div>
+          <div className="grid grid-cols-4 gap-6 py-8 border-y border-gray-200">
+            <StatBox label="Days" value={time.days} />
+            <StatBox label="Hours" value={time.hours} />
+            <StatBox label="Minutes" value={time.minutes} />
+            <StatBox label="Seconds" value={time.seconds} />
+          </div>
 
-  //           <Button asChild className="py-5">
-  //             <Link href="/search">View Products</Link>
-  //           </Button>
-  //         </div>
+          <Button asChild className="py-5">
+            <Link href="/search">View Products</Link>
+          </Button>
+        </div>
 
-  //         <div className="flex justify-center md:justify-end">
-  //           <div className="bg-gray-50 aspect-[4/3] w-full max-w-md overflow-hidden relative">
-  //             <Image
-  //               src="/banner-1.avif"
-  //               alt="promotion"
-  //               fill
-  //               className="object-cover"
-  //             />
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </section>
-  //   );
+        <div className="flex justify-center md:justify-end">
+          <div className="bg-gray-50 aspect-[4/3] w-full max-w-md overflow-hidden relative">
+            <Image
+              src="/banner-1.avif"
+              alt="promotion"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default DealCountdown;
