@@ -35,7 +35,7 @@ function OrderDetailsTable({
   isAdmin = false,
   stripeClientSecret,
 }: {
-  order: Order;
+  order: Omit<Order, "paymentResult">;
   paypalClientId: string;
   isAdmin: boolean;
   stripeClientSecret: string | null;
@@ -52,9 +52,7 @@ function OrderDetailsTable({
     id,
     isDelivered,
     isPaid,
-    createdAt,
     paidAt,
-    user,
   } = order;
 
   const PrintLoadingState = () => {

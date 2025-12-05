@@ -42,9 +42,9 @@ function ProductImages({ images }: { images: string[] }) {
               width={0}
               height={0}
               sizes="100vw"
-              style={{ width: "100%", height: "auto" }}
+              // style={{ width: "100%", height: "auto" }}
               alt={`thumbnail ${index + 1}`}
-              className=" object-cover"
+              className=" object-cover w-50 md:w-full lg:w-50 "
             />
           </div>
         ))}
